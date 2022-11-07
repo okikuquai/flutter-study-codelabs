@@ -1,16 +1,34 @@
 # startup_namer
 
-A new Flutter project.
+[codelabs](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1/?hl=ja#0)を参考にしたflutter学習用プロジェクト
 
-## Getting Started
+## 開発環境
+- [Dart 2.18.4(stable)](https://dart.dev/guides/whats-new#august-30-2022-218-release)
+- [Any editor which Flutter plugin is available on](https://flutter.dev/docs/get-started/editor)
+- [Android Studio Chipmunk 2021.3.1](https://developer.android.com/studio/)
 
-This project is a starting point for a Flutter application.
+## セットアップ方法
 
-A few resources to get you started if this is your first Flutter project:
+<details>
+<summary>Steps</summary>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Install [Dart](https://dart.dev/)
+    - Follow the instruction described at [Get the Dart SDK](https://dart.dev/get-dart)
+    - If you're on macOS, you can install Dart with [Homebrew](https://brew.sh/)
+      ```
+      brew tap dart-lang/dart
+      brew install dart
+      ```
+2. Install [fvm](https://github.com/leoafarias/fvm)
+   ```
+   dart pub global activate fvm
+   ```
+3. Install Flutter
+   ```
+   fvm install
+   ```
+4. Install Dart packages
+   ```
+   fvm flutter pub get
+   ```
+</details>
