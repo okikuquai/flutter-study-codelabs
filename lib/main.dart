@@ -36,7 +36,7 @@ class _RandomWordsState extends State<RandomWords> {
   *  Set型
   * (ドキュメント引用)Set is preferred to List because a properly implemented Set doesn't allow duplicate entries.
   * →重複した値を持たないListみたいな感じ
-  * */
+  */
   final _saved = <WordPair>{};     // add
   final _biggerFont = TextStyle(fontSize: 18);
   @override
@@ -51,7 +51,7 @@ class _RandomWordsState extends State<RandomWords> {
         if (index >= _suggestions.length) {
           _suggestions.addAll(generateWordPairs().take(10));
         }
-        //suggestions[index]の内容を検索し、代入
+        //suggestions[index]があるか、ないか(bool)
         final alreadySaved = _saved.contains(_suggestions[index]); // add
         return ListTile(
           title: Text(
@@ -59,14 +59,24 @@ class _RandomWordsState extends State<RandomWords> {
             style: _biggerFont,
           ),
 
-          // NEW from here ...
+          //iconを表示（右端にくるのはなぜ？）
           trailing: Icon(
             alreadySaved ? Icons.favorite : Icons.favorite_border,
             color: alreadySaved ? Colors.red : null,
             //
             semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
           ),
-          // to here
+          onTap: () {          // NEW from here ...
+            setState(() {
+              //リストをタップした時の動作
+              //_saved内に_suggestions[indes]がない場合(alreadysaved == true)にadd, addされていた場合(alreadysaved == true)はremove
+              if (alreadySaved) {
+                _saved.remove(_suggestions[index]);
+              } else {
+                _saved.add(_suggestions[index]);
+              }
+            });                // to here.
+          },
         );
       },
     );
