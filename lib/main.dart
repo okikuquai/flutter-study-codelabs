@@ -91,7 +91,7 @@ class _RandomWordsState extends State<RandomWords> {
       //MaterialPageRouteを引数として指定することで遷移時にMaterialDesignに則ったアニメーションをしてくれる
       MaterialPageRoute<void>(
         builder: (context) {
-          //_saved内の項目をmap型に変換→ListTitle型に変換してreturn
+          //_saved内の項目をmap型に変換→Text()が格納されたListTitle型に変換してreturn
           final tiles = _saved.map(
                 (pair) {
               return ListTile(
@@ -106,6 +106,8 @@ class _RandomWordsState extends State<RandomWords> {
           //項目ごとを線で分割
           final divided = tiles.isNotEmpty
               ? ListTile.divideTiles(
+            //どのwidgetのcontextなのかを指定（今、どの位置にいるの？を指定）
+            //この場合はnavigatorが呼び出される前にnavigatorが持ってきてくれたcontextを指定している
             context: context,
             tiles: tiles,
           ).toList()
