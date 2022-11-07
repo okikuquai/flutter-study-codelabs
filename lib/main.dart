@@ -10,10 +10,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //なぜconst?
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Startup Name Generator',
-      home: RandomWords(),
+      theme: ThemeData(          // Add the 5 lines from here...
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+      ),                         // ... to here.
+      home: const RandomWords(),
     );
   }
 }
@@ -62,7 +67,6 @@ class _RandomWordsState extends State<RandomWords> {
               style: _biggerFont,
             ),
 
-            //iconを表示（右端にくるのはなぜ？）
             trailing: Icon(
               alreadySaved ? Icons.favorite : Icons.favorite_border,
               color: alreadySaved ? Colors.red : null,
