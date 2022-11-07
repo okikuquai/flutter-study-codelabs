@@ -31,8 +31,14 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];                 // NEW
-  final _biggerFont = const TextStyle(fontSize: 18); // NEW
+  final _suggestions = <WordPair>[];
+  /*
+  *  Set型
+  * (ドキュメント引用)Set is preferred to List because a properly implemented Set doesn't allow duplicate entries.
+  * →重複した値を持たないListみたいな感じ
+  * */
+  final _saved = <WordPair>{};     // add
+  final _biggerFont = TextStyle(fontSize: 18);
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -41,14 +47,26 @@ class _RandomWordsState extends State<RandomWords> {
         if (i.isOdd) return const Divider();
 
         final index = i ~/ 2;
+
         if (index >= _suggestions.length) {
           _suggestions.addAll(generateWordPairs().take(10));
         }
+        //suggestions[index]の内容を検索し、代入
+        final alreadySaved = _saved.contains(_suggestions[index]); // add
         return ListTile(
           title: Text(
             _suggestions[index].asPascalCase,
             style: _biggerFont,
           ),
+
+          // NEW from here ...
+          trailing: Icon(
+            alreadySaved ? Icons.favorite : Icons.favorite_border,
+            color: alreadySaved ? Colors.red : null,
+            //
+            semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
+          ),
+          // to here
         );
       },
     );
